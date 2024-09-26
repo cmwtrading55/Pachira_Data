@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Pachira_Financials/static/css/main.ef68ae03.css",
+    "main.js": "/Pachira_Financials/static/js/main.cb3ecac8.js",
+    "static/js/453.ddfbc815.chunk.js": "/Pachira_Financials/static/js/453.ddfbc815.chunk.js",
+    "index.html": "/Pachira_Financials/index.html",
+    "main.ef68ae03.css.map": "/Pachira_Financials/static/css/main.ef68ae03.css.map",
+    "main.cb3ecac8.js.map": "/Pachira_Financials/static/js/main.cb3ecac8.js.map",
+    "453.ddfbc815.chunk.js.map": "/Pachira_Financials/static/js/453.ddfbc815.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ef68ae03.css",
+    "static/js/main.cb3ecac8.js"
+  ]
+}

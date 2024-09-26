@@ -1,0 +1,29 @@
+/* src/components/GoogleSheetData.css */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  text-align: right;
+}
+
+th {
+  cursor: pointer;
+  background-color: #f2f2f2;
+}
+
+.positive {
+  background-color: #d4edda; /* Light green background */
+  color: #155724; /* Dark green text */
+}
+
+.negative {
+  background-color: #f8d7da; /* Light red background */
+  color: #721c24; /* Dark red text */
+}
+
+td {
+  border: 1px solid #ddd;
+}
