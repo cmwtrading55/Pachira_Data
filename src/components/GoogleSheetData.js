@@ -1,12 +1,10 @@
 // src/components/GoogleSheetData.js
 import React, { useState, useEffect, useMemo } from 'react';
-// eslint-disable-next-line no-unused-vars
 import axios from 'axios';
 import SummaryTable from './SummaryTable';
 import { fetchDataFromSheet } from '../utils/DataFetcher';
 import { calculateWeeklySummary, calculateAllSummary } from '../utils/Calculations';
 import './GoogleSheetData.css';
-
 
 const GoogleSheetData = () => {
   const [summaryData, setSummaryData] = useState([]);
@@ -18,10 +16,9 @@ const GoogleSheetData = () => {
   const [error, setError] = useState(null);
   const [sortConfig, setSortConfig] = useState({ key: 'date', direction: 'ascending' });
   const [view, setView] = useState('daily');
-  const sheetId = process.env.REACT_APP_SHEET_ID;
-  const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
 
-
+  const sheetId = '1D2B33Uj1vS_weRZQAQdMRcaQbk1KG1SAjNfoaHAKrSo'; // Your Google Sheet ID
+  const apiKey = 'AIzaSyCPXl_3elTDd4_gs-xpPmm4laVoO3P4RPA'; // Your API Key
 
   // Memoize the tabNames array to prevent re-creation on each render
   const tabNames = useMemo(() => ['S1x', 'S2x', 'S3PM', 'S3IR', 'follow', 'Tennis', 'MLB', 'American Football'], []);

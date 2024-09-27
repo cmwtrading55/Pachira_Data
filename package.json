@@ -2,7 +2,7 @@
   "name": "pachira-financials",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://cmwtrading55.github.io/Pachira_Financials/",
+  "homepage": "https://cmwtrading55.github.io/Pachira_Financials",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -20,7 +20,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "CI=false gh-pages -d build"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
