@@ -18,7 +18,8 @@ const GoogleSheetData = () => {
   const [view, setView] = useState('daily');
 
   const sheetId = '1D2B33Uj1vS_weRZQAQdMRcaQbk1KG1SAjNfoaHAKrSo'; // Your Google Sheet ID
-  const apiKey = 'AIzaSyBAPhvHyE-PbFUktWwlt-2_KJfwQTabEvQ'; // Your API Key
+  const apiKey = process.env.REACT_APP_GOOGLE_SHEETS_API_KEY; // Use API Key from .env file
+
 
   // Memoize the tabNames array to prevent re-creation on each render
   const tabNames = useMemo(() => ['S1x', 'S2x', 'S3PM', 'S3IR', 'follow', 'Tennis', 'MLB', 'American Football'], []);
