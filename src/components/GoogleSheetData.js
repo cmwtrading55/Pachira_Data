@@ -20,6 +20,9 @@ const GoogleSheetData = () => {
   const sheetId = '1D2B33Uj1vS_weRZQAQdMRcaQbk1KG1SAjNfoaHAKrSo'; // Your Google Sheet ID
   const apiKey = 'AIzaSyCPXl_3elTDd4_gs-xpPmm4laVoO3P4RPA'; // Your API Key
 
+  console.log('Sheet ID:', sheetId);
+  console.log('API Key:', apiKey);
+
   // Memoize the tabNames array to prevent re-creation on each render
   const tabNames = useMemo(() => ['S1x', 'S2x', 'S3PM', 'S3IR', 'follow', 'Tennis', 'MLB', 'American Football'], []);
 
@@ -134,119 +137,119 @@ const GoogleSheetData = () => {
   const sortData = (key) => {
     let direction = 'ascending';
     if (sortConfig.key === key && sortConfig.direction === 'ascending') {
-      direction = 'descending';
+        direction = 'descending';
     }
 
     const dataToSort =
-      view === 'daily' ? summaryData :
-      view === 'weekly' ? weeklySummaryData :
-      view === 'all' ? allSummaryData :
-      view === 'dailyPachira' ? dailyPachiraData :
-      view === 'weeklyPachira' ? weeklyPachiraData : [];
+        view === 'daily' ? summaryData :
+        view === 'weekly' ? weeklySummaryData :
+        view === 'all' ? allSummaryData :
+        view === 'dailyPachira' ? dailyPachiraData :
+        view === 'weeklyPachira' ? weeklyPachiraData : [];
 
     const sortedData = [...dataToSort].sort((a, b) => {
-      if (key === 'date' || key === 'weekStart') {
-        return direction === 'ascending'
-          ? new Date(a[key].split('/').reverse().join('-')) - new Date(b[key].split('/').reverse().join('-'))
-          : new Date(b[key].split('/').reverse().join('-')) - new Date(a[key].split('/').reverse().join('-'));
-      } else {
-        const aValue = a[key] !== undefined ? a[key] : 0;
-        const bValue = b[key] !== undefined ? b[key] : 0;
-        return direction === 'ascending' ? aValue - bValue : bValue - aValue;
-      }
+        if (key === 'date' || key === 'weekStart') {
+            return direction === 'ascending'
+                ? new Date(a[key].split('/').reverse().join('-')) - new Date(b[key].split('/').reverse().join('-'))
+                : new Date(b[key].split('/').reverse().join('-')) - new Date(a[key].split('/').reverse().join('-'));
+        } else {
+            const aValue = a[key] !== undefined ? a[key] : 0;
+            const bValue = b[key] !== undefined ? b[key] : 0;
+            return direction === 'ascending' ? aValue - bValue : bValue - aValue;
+        }
     });
 
-        if (view === 'daily') {
-      setSummaryData(sortedData);
+    if (view === 'daily') {
+        setSummaryData(sortedData);
     } else if (view === 'weekly') {
-      setWeeklySummaryData(sortedData);
+        setWeeklySummaryData(sortedData);
     } else if (view === 'all') {
-      setAllSummaryData(sortedData);
+        setAllSummaryData(sortedData);
     } else if (view === 'dailyPachira') {
-      setDailyPachiraData(sortedData);
+        setDailyPachiraData(sortedData);
     } else if (view === 'weeklyPachira') {
-      setWeeklyPachiraData(sortedData);
+        setWeeklyPachiraData(sortedData);
     }
 
     setSortConfig({ key, direction });
-  };
+};
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+if (loading) return <div>Loading...</div>;
+if (error) return <div>{error}</div>;
 
-  return (
+return (
     <div>
-      <h1>Performance Summary</h1>
-      <div>
-        <button onClick={() => setView('daily')}>Daily Summary</button>
-        <button onClick={() => setView('weekly')}>Weekly Summary</button>
-        <button onClick={() => setView('all')}>All Summary</button>
-        <button onClick={() => setView('dailyPachira')}>Daily Pachira Income</button>
-        <button onClick={() => setView('weeklyPachira')}>Weekly Pachira Income</button>
-      </div>
-      {view === 'daily' ? (
-        <>
-          <h2>Daily Summary</h2>
-          <SummaryTable
-            data={summaryData}
-            sortConfig={sortConfig}
-            sortData={sortData}
-            tabNames={tabNames}
-            isWeekly={false}
-            isAllSummary={false}
-          />
-        </>
-      ) : view === 'weekly' ? (
-        <>
-          <h2>Weekly Summary</h2>
-          <SummaryTable
-            data={weeklySummaryData}
-            sortConfig={sortConfig}
-            sortData={sortData}
-            tabNames={tabNames}
-            isWeekly={true}
-            isAllSummary={false}
-          />
-        </>
-      ) : view === 'all' ? (
-        <>
-          <h2>All Summary</h2>
-          <SummaryTable
-            data={allSummaryData}
-            sortConfig={sortConfig}
-            sortData={sortData}
-            tabNames={tabNames}
-            isWeekly={false}
-            isAllSummary={true}
-          />
-        </>
-      ) : view === 'dailyPachira' ? (
-        <>
-          <h2>Daily Pachira Income</h2>
-          <SummaryTable
-            data={dailyPachiraData}
-            sortConfig={sortConfig}
-            sortData={sortData}
-            tabNames={pachiraTabNames}
-            isWeekly={false}
-            isAllSummary={false}
-          />
-        </>
-      ) : view === 'weeklyPachira' ? (
-        <>
-          <h2>Weekly Pachira Income</h2>
-          <SummaryTable
-            data={weeklyPachiraData}
-            sortConfig={sortConfig}
-            sortData={sortData}
-            tabNames={pachiraTabNames}
-            isWeekly={true}
-            isAllSummary={false}
-          />
-        </>
-      ) : null}
+        <h1>Performance Summary</h1>
+        <div>
+            <button onClick={() => setView('daily')}>Daily Summary</button>
+            <button onClick={() => setView('weekly')}>Weekly Summary</button>
+            <button onClick={() => setView('all')}>All Summary</button>
+            <button onClick={() => setView('dailyPachira')}>Daily Pachira Income</button>
+            <button onClick={() => setView('weeklyPachira')}>Weekly Pachira Income</button>
+        </div>
+        {view === 'daily' ? (
+            <>
+                <h2>Daily Summary</h2>
+                <SummaryTable
+                    data={summaryData}
+                    sortConfig={sortConfig}
+                    sortData={sortData}
+                    tabNames={tabNames}
+                    isWeekly={false}
+                    isAllSummary={false}
+                />
+            </>
+        ) : view === 'weekly' ? (
+            <>
+                <h2>Weekly Summary</h2>
+                <SummaryTable
+                    data={weeklySummaryData}
+                    sortConfig={sortConfig}
+                    sortData={sortData}
+                    tabNames={tabNames}
+                    isWeekly={true}
+                    isAllSummary={false}
+                />
+            </>
+        ) : view === 'all' ? (
+            <>
+                <h2>All Summary</h2>
+                <SummaryTable
+                    data={allSummaryData}
+                    sortConfig={sortConfig}
+                    sortData={sortData}
+                    tabNames={tabNames}
+                    isWeekly={false}
+                    isAllSummary={true}
+                />
+            </>
+        ) : view === 'dailyPachira' ? (
+            <>
+                <h2>Daily Pachira Income</h2>
+                <SummaryTable
+                    data={dailyPachiraData}
+                    sortConfig={sortConfig}
+                    sortData={sortData}
+                    tabNames={pachiraTabNames}
+                    isWeekly={false}
+                    isAllSummary={false}
+                />
+            </>
+        ) : view === 'weeklyPachira' ? (
+            <>
+                <h2>Weekly Pachira Income</h2>
+                <SummaryTable
+                    data={weeklyPachiraData}
+                    sortConfig={sortConfig}
+                    sortData={sortData}
+                    tabNames={pachiraTabNames}
+                    isWeekly={true}
+                    isAllSummary={false}
+                />
+            </>
+        ) : null}
     </div>
-  );
+);
 };
 
 export default GoogleSheetData;
