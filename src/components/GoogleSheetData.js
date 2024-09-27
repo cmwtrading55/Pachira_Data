@@ -16,9 +16,9 @@ const GoogleSheetData = () => {
   const [error, setError] = useState(null);
   const [sortConfig, setSortConfig] = useState({ key: 'date', direction: 'ascending' });
   const [view, setView] = useState('daily');
+  const sheetId = process.env.REACT_APP_SHEET_ID;
+  const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
 
-  const sheetId = '1D2B33Uj1vS_weRZQAQdMRcaQbk1KG1SAjNfoaHAKrSo'; // Your Google Sheet ID
-  const apiKey = process.env.REACT_APP_GOOGLE_SHEETS_API_KEY; // Use API Key from .env file
 
 
   // Memoize the tabNames array to prevent re-creation on each render
