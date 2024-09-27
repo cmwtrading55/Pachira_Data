@@ -1,10 +1,12 @@
 // src/components/GoogleSheetData.js
 import React, { useState, useEffect, useMemo } from 'react';
+// eslint-disable-next-line no-unused-vars
 import axios from 'axios';
 import SummaryTable from './SummaryTable';
 import { fetchDataFromSheet } from '../utils/DataFetcher';
 import { calculateWeeklySummary, calculateAllSummary } from '../utils/Calculations';
 import './GoogleSheetData.css';
+
 
 const GoogleSheetData = () => {
   const [summaryData, setSummaryData] = useState([]);
