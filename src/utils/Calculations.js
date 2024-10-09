@@ -1,6 +1,6 @@
 // src/utils/Calculations.js
 
-// Function to calculate weekly summary
+// Function to calculate weekly summary with Monday as the start of the week
 export const calculateWeeklySummary = (dailyData, tabNames) => {
   const weeklySummary = {};
 
@@ -8,7 +8,13 @@ export const calculateWeeklySummary = (dailyData, tabNames) => {
     const dateParts = row.date.split('/');
     const [day, month, year] = dateParts.map(Number);
     const dateObj = new Date(year, month - 1, day);
-    const weekStart = new Date(dateObj.setDate(dateObj.getDate() - dateObj.getDay() + 1));
+
+    // Get the day of the week (0 = Sunday, 1 = Monday, etc.)
+    const dayOfWeek = dateObj.getDay();
+    // If the day is Sunday (0), set it to 7 to treat it as the end of the week
+    const adjustedDay = dayOfWeek === 0 ? 7 : dayOfWeek;
+    // Calculate the Monday of the current week
+    const weekStart = new Date(dateObj.setDate(dateObj.getDate() - adjustedDay + 1));
     const weekKey = weekStart.toISOString().split('T')[0];
 
     if (!weeklySummary[weekKey]) {
