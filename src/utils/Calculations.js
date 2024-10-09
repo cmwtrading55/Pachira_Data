@@ -1,6 +1,6 @@
 // src/utils/Calculations.js
 
-// Function to calculate weekly summary with Monday as the start of the week
+// Function to calculate weekly summary with Monday as the start of the week and label in dd/mm/yyyy format
 export const calculateWeeklySummary = (dailyData, tabNames) => {
   const weeklySummary = {};
 
@@ -9,27 +9,29 @@ export const calculateWeeklySummary = (dailyData, tabNames) => {
     const [day, month, year] = dateParts.map(Number);
     const dateObj = new Date(year, month - 1, day);
 
-    // Get the day of the week (0 = Sunday, 1 = Monday, etc.)
-    const dayOfWeek = dateObj.getDay();
-    // If the day is Sunday (0), set it to 7 to treat it as the end of the week
-    const adjustedDay = dayOfWeek === 0 ? 7 : dayOfWeek;
-    // Calculate the Monday of the current week
-    const weekStart = new Date(dateObj.setDate(dateObj.getDate() - adjustedDay + 1));
-    const weekKey = weekStart.toISOString().split('T')[0];
+    // Adjust for week starting on Monday (ISO week)
+    const dayOfWeek = (dateObj.getDay() + 6) % 7; // Monday becomes 0, Sunday becomes 6
+    const weekStart = new Date(dateObj);
+    weekStart.setDate(dateObj.getDate() - dayOfWeek); // Set to the previous Monday
 
-    if (!weeklySummary[weekKey]) {
-      weeklySummary[weekKey] = { weekStart: weekKey };
+    // Convert weekStart to dd/mm/yyyy format for labels
+    const weekLabel = `${('0' + weekStart.getDate()).slice(-2)}/${('0' + (weekStart.getMonth() + 1)).slice(-2)}/${weekStart.getFullYear()}`;
+
+    if (!weeklySummary[weekLabel]) {
+      weeklySummary[weekLabel] = { weekStart: weekLabel }; // Label in dd/mm/yyyy format
     }
 
     tabNames.forEach(tab => {
-      weeklySummary[weekKey][tab] = (weeklySummary[weekKey][tab] || 0) + (row[tab] || 0);
+      weeklySummary[weekLabel][tab] = (weeklySummary[weekLabel][tab] || 0) + (row[tab] || 0);
     });
 
-    weeklySummary[weekKey].Total = (weeklySummary[weekKey].Total || 0) + row.Total;
+    weeklySummary[weekLabel].Total = (weeklySummary[weekLabel].Total || 0) + row.Total;
   });
 
   return Object.values(weeklySummary);
 };
+
+
 
 // Function to calculate all summary
 export const calculateAllSummary = (dailyData, tabNames) => {
