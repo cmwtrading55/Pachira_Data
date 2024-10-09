@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Pachira_Data/static/css/main.ef68ae03.css",
+    "main.js": "/Pachira_Data/static/js/main.30d401ec.js",
+    "static/js/453.ddfbc815.chunk.js": "/Pachira_Data/static/js/453.ddfbc815.chunk.js",
+    "index.html": "/Pachira_Data/index.html",
+    "main.ef68ae03.css.map": "/Pachira_Data/static/css/main.ef68ae03.css.map",
+    "main.30d401ec.js.map": "/Pachira_Data/static/js/main.30d401ec.js.map",
+    "453.ddfbc815.chunk.js.map": "/Pachira_Data/static/js/453.ddfbc815.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ef68ae03.css",
+    "static/js/main.30d401ec.js"
+  ]
+}
